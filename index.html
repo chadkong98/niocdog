@@ -221,3 +221,116 @@
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('three-container').appendChild(renderer.domElement);
+
+        // Create particles
+        const particles = new THREE.Group();
+        scene.add(particles);
+        
+        const geometry = new THREE.SphereGeometry(0.05, 32, 32);
+        const material = new THREE.MeshBasicMaterial({ 
+            color: 0xFFD700,
+            transparent: true,
+            opacity: 0.6
+        });
+
+        // Add multiple particles
+        for (let i = 0; i < 100; i++) {
+            const particle = new THREE.Mesh(geometry, material);
+            
+            // Random position
+            particle.position.x = (Math.random() - 0.5) * 10;
+            particle.position.y = (Math.random() - 0.5) * 10;
+            particle.position.z = (Math.random() - 0.5) * 10;
+            
+            // Store original position for animation
+            particle.userData.originalY = particle.position.y;
+            particle.userData.speed = Math.random() * 0.02;
+            
+            particles.add(particle);
+        }
+
+        camera.position.z = 5;
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate entire particle system
+            particles.rotation.y += 0.001;
+            
+            // Animate individual particles
+            particles.children.forEach(particle => {
+                particle.position.y = particle.userData.originalY + 
+                    Math.sin(Date.now() * particle.userData.speed) * 0.3;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const startTime = Date.now();
+            
+            function updateCounter() {
+                const currentTime = Date.now();
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                const currentValue = Math.floor(progress * target);
+                counter.textContent = currentValue.toLocaleString();
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+            
+            updateCounter();
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Add fade-in animation to sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
