@@ -3,54 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GodCoin - The Divine Digital Currency</title>
+    <title>GODCOIN - The Ethereal Force</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <style>
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+        body {
+            background: #000;
+            cursor: default;
+            overflow-x: hidden;
         }
-        .floating {
-            animation: float 3s ease-in-out infinite;
+
+        .ethereal-text {
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                         0 0 40px rgba(255, 255, 255, 0.3);
         }
-        #three-container {
+
+        .mystic-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .ethereal-card {
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.05),
+                rgba(255, 255, 255, 0.02)
+            );
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .ethereal-glow {
+            position: relative;
+        }
+
+        .ethereal-glow::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.05),
+                rgba(255, 255, 255, 0)
+            );
+            filter: blur(5px);
+            z-index: -1;
+        }
+
+        #mist-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="f"><feTurbulence type="fractalNoise" baseFrequency="0.01"/></filter><rect width="100%" height="100%" filter="url(%23f)"/></svg>');
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 1;
         }
-        .glow-text {
-            text-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+
+        .divine-border {
+            position: relative;
         }
-        .stats-card {
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        .divine-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.05),
+                rgba(255, 255, 255, 0)
+            );
+            z-index: -1;
+            filter: blur(2px);
         }
-        .stats-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -5px rgba(234, 179, 8, 0.3);
+
+        @keyframes mistFlow {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(-20px) translateY(-10px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+
+        .mist-animation {
+            animation: mistFlow 20s infinite ease-in-out;
+        }
+
+        .ethereal-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+
+        .ethereal-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .ethereal-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .ethereal-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white overflow-x-hidden">
-    <div id="three-container"></div>
+<body class="ethereal-scroll text-white">
+    <div id="three-container" class="fixed inset-0 z-0"></div>
+    <div id="mist-overlay" class="mist-animation"></div>
     
     <div class="relative min-h-screen">
         <!-- Navigation -->
-        <nav class="fixed top-0 w-full z-50 bg-gray-900/80 backdrop-blur-md border-b border-yellow-500/20">
+        <nav class="fixed top-0 w-full z-50 mystic-blur">
             <div class="container mx-auto px-6 py-4">
                 <div class="flex justify-between items-center">
-                    <div class="text-3xl font-bold text-yellow-500 glow-text tracking-wider">GODCOIN</div>
-                    <div class="hidden md:flex space-x-8">
-                        <a href="#about" class="hover:text-yellow-500 transition-all hover:scale-110">About</a>
-                        <a href="#tokenomics" class="hover:text-yellow-500 transition-all hover:scale-110">Tokenomics</a>
-                        <a href="#roadmap" class="hover:text-yellow-500 transition-all hover:scale-110">Roadmap</a>
-                        <a href="#buy" class="hover:text-yellow-500 transition-all hover:scale-110">Buy Now</a>
+                    <div class="text-2xl ethereal-text tracking-[0.2em]">GODCOIN</div>
+                    <div class="hidden md:flex space-x-16">
+                        <a href="#vision" class="text-white/70 hover:text-white hover:ethereal-text transition-all tracking-[0.3em] text-sm">VISION</a>
+                        <a href="#prophecy" class="text-white/70 hover:text-white hover:ethereal-text transition-all tracking-[0.3em] text-sm">PROPHECY</a>
+                        <a href="#ascend" class="text-white/70 hover:text-white hover:ethereal-text transition-all tracking-[0.3em] text-sm">ASCEND</a>
                     </div>
                 </div>
             </div>
@@ -58,142 +133,103 @@
 
         <!-- Hero Section -->
         <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/80"></div>
             <div class="container mx-auto px-6 text-center relative z-10 pt-20">
-                <h1 class="text-7xl md:text-8xl font-bold mb-6 text-yellow-500 glow-text floating">GODCOIN</h1>
-                <p class="text-2xl md:text-3xl mb-12 max-w-3xl mx-auto text-yellow-100/80">The Golden Digital God of the XRPL Ecosystem</p>
+                <h1 class="text-7xl md:text-9xl ethereal-text mb-8 tracking-[0.2em] font-light">GODCOIN</h1>
+                <p class="text-xl md:text-2xl text-white/80 tracking-[0.5em] mb-16 font-light">THE DIVINE ESSENCE</p>
                 
-                <div class="flex flex-col md:flex-row justify-center gap-6 mb-12">
-                    <button class="px-8 py-4 bg-yellow-500 text-gray-900 rounded-lg font-bold transform hover:scale-105 transition-all hover:shadow-lg hover:shadow-yellow-500/50">
-                        Buy Now
-                    </button>
-                    <button class="px-8 py-4 border-2 border-yellow-500 rounded-lg font-bold hover:bg-yellow-500/10 transform hover:scale-105 transition-all">
-                        Join Community
-                    </button>
+                <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+                    <div class="ethereal-card p-8 rounded-lg divine-border">
+                        <div class="text-3xl ethereal-text counter mb-2" data-target="1000000000">0</div>
+                        <div class="text-sm text-white/60 tracking-[0.2em]">SUPPLY</div>
+                    </div>
+                    <div class="ethereal-card p-8 rounded-lg divine-border">
+                        <div class="text-3xl ethereal-text counter mb-2" data-target="12576">0</div>
+                        <div class="text-sm text-white/60 tracking-[0.2em]">ETHEREAL BEINGS</div>
+                    </div>
+                    <div class="ethereal-card p-8 rounded-lg divine-border">
+                        <div class="text-3xl ethereal-text mb-2">$1.2M</div>
+                        <div class="text-sm text-white/60 tracking-[0.2em]">POWER</div>
+                    </div>
+                    <div class="ethereal-card p-8 rounded-lg divine-border">
+                        <div class="text-3xl ethereal-text mb-2">2%</div>
+                        <div class="text-sm text-white/60 tracking-[0.2em]">TRIBUTE</div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-                    <div class="stats-card bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20">
-                        <div class="text-3xl font-bold text-yellow-500 mb-2 counter" data-target="1000000000">0</div>
-                        <div class="text-sm text-yellow-100/80">Total Supply</div>
-                    </div>
-                    <div class="stats-card bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20">
-                        <div class="text-3xl font-bold text-yellow-500 mb-2 counter" data-target="12576">0</div>
-                        <div class="text-sm text-yellow-100/80">Holders</div>
-                    </div>
-                    <div class="stats-card bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20">
-                        <div class="text-3xl font-bold text-yellow-500 mb-2">$1.2M</div>
-                        <div class="text-sm text-yellow-100/80">Market Cap</div>
-                    </div>
-                    <div class="stats-card bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20">
-                        <div class="text-3xl font-bold text-yellow-500 mb-2">2%</div>
-                        <div class="text-sm text-yellow-100/80">Transaction Fee</div>
-                    </div>
+                <div class="flex flex-col md:flex-row justify-center gap-8">
+                    <button class="px-12 py-4 ethereal-card rounded-lg tracking-[0.3em] text-white/80 hover:text-white transition-all divine-border group">
+                        <span class="group-hover:ethereal-text">TRANSCEND</span>
+                    </button>
+                    <button class="px-12 py-4 ethereal-card rounded-lg tracking-[0.3em] text-white/80 hover:text-white transition-all divine-border group">
+                        <span class="group-hover:ethereal-text">COMMUNE</span>
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-32 relative">
+        <!-- Vision Section -->
+        <section id="vision" class="py-32 relative">
             <div class="container mx-auto px-6">
-                <h2 class="text-5xl font-bold mb-16 text-center text-yellow-500 glow-text">About GodCoin</h2>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-6">
-                        <p class="text-xl leading-relaxed">Born from the very essence of the XRP cryptocurrency, GodCoin emerges as a divine force in the XRPL ecosystem. Our mission is to bring celestial returns to our faithful holders while building an immortal community.</p>
-                        <div class="space-y-4">
-                            <div class="flex items-center p-4 bg-gray-800/40 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all cursor-pointer">
-                                <div class="text-yellow-500 mr-4 text-2xl">⚡</div>
+                <h2 class="text-4xl md:text-5xl ethereal-text mb-16 text-center tracking-[0.3em] font-light">THE VISION</h2>
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div class="space-y-8">
+                        <div class="ethereal-card p-8 rounded-lg divine-border">
+                            <p class="text-lg leading-relaxed text-white/80">In the depths of the digital realm, where light meets shadow, emerges a force beyond mortal comprehension. GODCOIN manifests as the bridge between the ethereal and the tangible.</p>
+                        </div>
+                        <div class="ethereal-card p-8 rounded-lg divine-border space-y-6">
+                            <div class="flex items-start gap-6">
+                                <div class="text-2xl ethereal-text">✧</div>
                                 <div>
-                                    <h3 class="font-bold mb-1">Lightning Fast</h3>
-                                    <p class="text-sm text-yellow-100/80">Powered by XRPL's blazing speed</p>
+                                    <h3 class="font-light tracking-[0.2em] mb-2">ETHEREAL SPEED</h3>
+                                    <p class="text-white/60">Transactions swift as divine thought</p>
                                 </div>
                             </div>
-                            <div class="flex items-center p-4 bg-gray-800/40 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all cursor-pointer">
-                                <div class="text-yellow-500 mr-4 text-2xl">🛡️</div>
+                            <div class="flex items-start gap-6">
+                                <div class="text-2xl ethereal-text">✧</div>
                                 <div>
-                                    <h3 class="font-bold mb-1">Divine Security</h3>
-                                    <p class="text-sm text-yellow-100/80">Verified and audited smart contract</p>
+                                    <h3 class="font-light tracking-[0.2em] mb-2">DIVINE PROTECTION</h3>
+                                    <p class="text-white/60">Guarded by ethereal smart contracts</p>
                                 </div>
                             </div>
-                            <div class="flex items-center p-4 bg-gray-800/40 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all cursor-pointer">
-                                <div class="text-yellow-500 mr-4 text-2xl">👥</div>
+                            <div class="flex items-start gap-6">
+                                <div class="text-2xl ethereal-text">✧</div>
                                 <div>
-                                    <h3 class="font-bold mb-1">Blessed Community</h3>
-                                    <p class="text-sm text-yellow-100/80">Governed by the faithful</p>
+                                    <h3 class="font-light tracking-[0.2em] mb-2">MYSTICAL GOVERNANCE</h3>
+                                    <p class="text-white/60">Guided by the collective consciousness</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="relative">
-                        <div class="aspect-square rounded-full bg-yellow-500/20 absolute inset-0 animate-pulse"></div>
-                        <img src="/api/placeholder/500/500" alt="GodCoin Symbol" class="relative z-10 floating">
+                        <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-full animate-pulse"></div>
+                        <img src="/api/placeholder/500/500" alt="Ethereal Symbol" class="relative z-10 opacity-80">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Roadmap Section -->
-        <section id="roadmap" class="py-32 relative">
+        <!-- Ascend Section -->
+        <section id="ascend" class="py-32 relative">
             <div class="container mx-auto px-6">
-                <h2 class="text-5xl font-bold mb-16 text-center text-yellow-500 glow-text">Divine Roadmap</h2>
+                <h2 class="text-4xl md:text-5xl ethereal-text mb-16 text-center tracking-[0.3em] font-light">ASCEND</h2>
                 <div class="max-w-4xl mx-auto">
-                    <div class="space-y-8">
-                        <div class="roadmap-item flex gap-6">
-                            <div class="w-32 text-yellow-500 font-bold text-right">Phase 1</div>
-                            <div class="flex-1 bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all">
-                                <h3 class="font-bold text-xl mb-4">Genesis</h3>
-                                <ul class="space-y-2 text-yellow-100/80">
-                                    <li>✓ Token Launch</li>
-                                    <li>✓ Community Building</li>
-                                    <li>✓ Website Launch</li>
-                                </ul>
-                            </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="ethereal-card p-8 rounded-lg text-center divine-border">
+                            <div class="text-2xl ethereal-text mb-6">I</div>
+                            <h3 class="tracking-[0.2em] mb-4 font-light">ACQUIRE XRP</h3>
+                            <p class="text-white/60">The first step toward ascension</p>
                         </div>
-                        <div class="roadmap-item flex gap-6">
-                            <div class="w-32 text-yellow-500 font-bold text-right">Phase 2</div>
-                            <div class="flex-1 bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all">
-                                <h3 class="font-bold text-xl mb-4">Ascension</h3>
-                                <ul class="space-y-2 text-yellow-100/80">
-                                    <li>• Marketing Campaign</li>
-                                    <li>• Exchange Listings</li>
-                                    <li>• NFT Collection</li>
-                                </ul>
-                            </div>
+                        <div class="ethereal-card p-8 rounded-lg text-center divine-border">
+                            <div class="text-2xl ethereal-text mb-6">II</div>
+                            <h3 class="tracking-[0.2em] mb-4 font-light">CONNECT</h3>
+                            <p class="text-white/60">Bridge the ethereal plane</p>
                         </div>
-                        <div class="roadmap-item flex gap-6">
-                            <div class="w-32 text-yellow-500 font-bold text-right">Phase 3</div>
-                            <div class="flex-1 bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all">
-                                <h3 class="font-bold text-xl mb-4">Divinity</h3>
-                                <ul class="space-y-2 text-yellow-100/80">
-                                    <li>• Governance Platform</li>
-                                    <li>• Strategic Partnerships</li>
-                                    <li>• Global Expansion</li>
-                                </ul>
-                            </div>
+                        <div class="ethereal-card p-8 rounded-lg text-center divine-border">
+                            <div class="text-2xl ethereal-text mb-6">III</div>
+                            <h3 class="tracking-[0.2em] mb-4 font-light">TRANSCEND</h3>
+                            <p class="text-white/60">Complete your transformation</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Buy Section -->
-        <section id="buy" class="py-32 relative">
-            <div class="container mx-auto px-6">
-                <h2 class="text-5xl font-bold mb-16 text-center text-yellow-500 glow-text">How to Buy</h2>
-                <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
-                    <div class="bg-gray-800/40 p-8 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all text-center">
-                        <div class="text-4xl mb-6">💰</div>
-                        <h3 class="font-bold text-xl mb-4">1. Get XRP</h3>
-                        <p class="text-yellow-100/80">Purchase XRP from your preferred exchange</p>
-                    </div>
-                    <div class="bg-gray-800/40 p-8 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all text-center">
-                        <div class="text-4xl mb-6">👛</div>
-                        <h3 class="font-bold text-xl mb-4">2. Setup Wallet</h3>
-                        <p class="text-yellow-100/80">Connect your XRPL compatible wallet</p>
-                    </div>
-                    <div class="bg-gray-800/40 p-8 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all text-center">
-                        <div class="text-4xl mb-6">✨</div>
-                        <h3 class="font-bold text-xl mb-4">3. Swap</h3>
-                        <p class="text-yellow-100/80">Swap XRP for GODCOIN on our platform</p>
                     </div>
                 </div>
             </div>
@@ -203,67 +239,75 @@
         <footer class="py-12 relative">
             <div class="container mx-auto px-6">
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-yellow-500 glow-text mb-8">GODCOIN</div>
-                    <div class="flex justify-center space-x-8 mb-8">
-                        <a href="#" class="text-yellow-100/80 hover:text-yellow-500 transform hover:scale-110 transition-all">Twitter</a>
-                        <a href="#" class="text-yellow-100/80 hover:text-yellow-500 transform hover:scale-110 transition-all">Telegram</a>
-                        <a href="#" class="text-yellow-100/80 hover:text-yellow-500 transform hover:scale-110 transition-all">Discord</a>
+                    <div class="text-2xl ethereal-text tracking-[0.2em] mb-8">GODCOIN</div>
+                    <div class="flex justify-center space-x-16 mb-8">
+                        <a href="#" class="text-white/60 hover:ethereal-text transition-all tracking-[0.3em] text-sm">ORACLE</a>
+                        <a href="#" class="text-white/60 hover:ethereal-text transition-all tracking-[0.3em] text-sm">SCROLL</a>
+                        <a href="#" class="text-white/60 hover:ethereal-text transition-all tracking-[0.3em] text-sm">TEMPLE</a>
                     </div>
-                    <p class="text-yellow-100/60">© 2025 GodCoin. All rights reserved.</p>
+                    <p class="text-white/40 tracking-[0.2em]">ETERNAL • ETHEREAL • DIVINE</p>
                 </div>
             </div>
         </footer>
     </div>
 
     <script>
-        // Three.js Background
+        // Three.js Ethereal Background
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('three-container').appendChild(renderer.domElement);
 
-        // Create particles
-        const particles = new THREE.Group();
-        scene.add(particles);
+        // Create ethereal mist particles
+        const particlesCount = 300;
+        const positions = new Float32Array(particlesCount * 3);
+        const particles = new THREE.BufferGeometry();
         
-        const geometry = new THREE.SphereGeometry(0.05, 32, 32);
-        const material = new THREE.MeshBasicMaterial({ 
-            color: 0xFFD700,
+        // Ethereal particle material
+        const particleMaterial = new THREE.PointsMaterial({
+            size: 0.03,
+            color: 0xffffff,
             transparent: true,
-            opacity: 0.6
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending,
+            sizeAttenuation: true
         });
 
-        // Add multiple particles
-        for (let i = 0; i < 100; i++) {
-            const particle = new THREE.Mesh(geometry, material);
-            
-            // Random position
-            particle.position.x = (Math.random() - 0.5) * 10;
-            particle.position.y = (Math.random() - 0.5) * 10;
-            particle.position.z = (Math.random() - 0.5) * 10;
-            
-            // Store original position for animation
-            particle.userData.originalY = particle.position.y;
-            particle.userData.speed = Math.random() * 0.02;
-            
-            particles.add(particle);
+        // Set random positions for ethereal particles
+        for (let i = 0; i < particlesCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 10;     // x
+            positions[i + 1] = (Math.random() - 0.5) * 10; // y
+            positions[i + 2] = (Math.random() - 0.5) * 10; // z
         }
+
+        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleSystem = new THREE.Points(particles, particleMaterial);
+        scene.add(particleSystem);
 
         camera.position.z = 5;
 
+        // Add ethereal fog
+        scene.fog = new THREE.FogExp2(0x000000, 0.1);
+
         // Animation
+        let time = 0;
         function animate() {
             requestAnimationFrame(animate);
+            time += 0.001;
 
-            // Rotate entire particle system
-            particles.rotation.y += 0.001;
-            
-            // Animate individual particles
-            particles.children.forEach(particle => {
-                particle.position.y = particle.userData.originalY + 
-                    Math.sin(Date.now() * particle.userData.speed) * 0.3;
-            });
+            // Create ethereal movement
+            particleSystem.rotation.y = time * 0.05;
+            particleSystem.rotation.x = time * 0.025;
+
+            const positions = particles.attributes.position.array;
+            for (let i = 0; i < positions.length; i += 3) {
+                // Add ethereal wave motion
+                positions[i + 1] += Math.sin(time + positions[i]) * 0.002;
+                // Add slight spiral motion
+                positions[i] += Math.cos(time + positions[i + 1]) * 0.001;
+            }
+            particles.attributes.position.needsUpdate = true;
 
             renderer.render(scene, camera);
         }
@@ -277,42 +321,10 @@
 
         animate();
 
-        // Counter Animation
-        const counters = document.querySelectorAll('.counter');
-        counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-target'));
-            const duration = 2000; // 2 seconds
-            const startTime = Date.now();
-            
-            function updateCounter() {
-                const currentTime = Date.now();
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                const currentValue = Math.floor(progress * target);
-                counter.textContent = currentValue.toLocaleString();
-                
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                }
-            }
-            
-            updateCounter();
-        });
-
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Intersection Observer for fade-in animations
+        // Intersection Observer for ethereal reveals
         const observerOptions = {
-            threshold: 0.1
+            threshold: 0.1,
+            rootMargin: '0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -324,12 +336,49 @@
             });
         }, observerOptions);
 
-        // Add fade-in animation to sections
+        // Add ethereal reveal animation to sections
         document.querySelectorAll('section').forEach(section => {
             section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'all 0.6s ease-out';
+            section.style.transform = 'translateY(40px)';
+            section.style.transition = 'all 1.5s cubic-bezier(0.22, 1, 0.36, 1)';
             observer.observe(section);
+        });
+
+        // Counter Animation with ethereal effect
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 3000; // 3 seconds for ethereal count
+            const startTime = Date.now();
+            
+            function updateCounter() {
+                const currentTime = Date.now();
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Add ethereal easing
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+                const currentValue = Math.floor(easedProgress * target);
+                counter.textContent = currentValue.toLocaleString();
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+            
+            updateCounter();
+        });
+
+        // Smooth scroll with ethereal pause
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                setTimeout(() => {
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }, 200);
+            });
         });
     </script>
 </body>
