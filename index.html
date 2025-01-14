@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GodCoin - The Divine Digital Currency</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        #three-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+        }
+        .stats-card {
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -5px rgba(234, 179, 8, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <div id="three-container"></div>
+    
+    <div class="relative min-h-screen">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full z-50 bg-gray-900/80 backdrop-blur-md border-b border-yellow-500/20">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="text-3xl font-bold text-yellow-500 glow-text tracking-wider">GODCOIN</div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#about" class="hover:text-yellow-500 transition-all hover:scale-110">About</a>
+                        <a href="#tokenomics" class="hover:text-yellow-500 transition-all hover:scale-110">Tokenomics</a>
+                        <a href="#roadmap" class="hover:text-yellow-500 transition-all hover:scale-110">Roadmap</a>
+                        <a href="#buy" class="hover:text-yellow-500 transition-all hover:scale-110">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+            <div class="container mx-auto px-6 text-center relative z-10 pt-20">
+                <h1 class="text-7xl md:text-8xl font-bold mb-6 text-yellow-500 glow-text floating">GODCOIN</h1>
+                <p class="text-2xl md:text-3xl mb-12 max-w-3xl mx-auto text-yellow-100/80">The Golden Digital God of the XRPL Ecosystem</p>
+                
+                <div class="flex flex-col md:flex-row justify-center gap-6 mb-12">
+                    <button class="px-8 py-4 bg-yellow-500 text-gray-900 rounded-lg font-bold transform hover:scale-105 transition-all hover:shadow-lg hover:shadow-yellow-500/50">
+                        Buy Now
+                    </button>
+                    <button class="px-8 py-4 border-2 border-yellow-500 rounded-lg font-bold hover:bg-yellow-500/10 transform hover:scale-105 transition-all">
+                        Join Community
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div class="stats-card bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20">
+                        <div class="text-3xl font-bold text-yellow-500 mb-2 counter" data-target="1000000000">0</div>
+                        <div class="text-sm text-yellow-100/80">Total Supply</div>
+                    </div>
+                    <div class="stats-card bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20">
+                        <div class="text-3xl font-bold text-yellow-500 mb-2 counter" data-target="12576">0</div>
+                        <div class="text-sm text-yellow-100/80">Holders</div>
+                    </div>
+                    <div class="stats-card bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20">
+                        <div class="text-3xl font-bold text-yellow-500 mb-2">$1.2M</div>
+                        <div class="text-sm text-yellow-100/80">Market Cap</div>
+                    </div>
+                    <div class="stats-card bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20">
+                        <div class="text-3xl font-bold text-yellow-500 mb-2">2%</div>
+                        <div class="text-sm text-yellow-100/80">Transaction Fee</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-32 relative">
+            <div class="container mx-auto px-6">
+                <h2 class="text-5xl font-bold mb-16 text-center text-yellow-500 glow-text">About GodCoin</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <p class="text-xl leading-relaxed">Born from the very essence of the XRP cryptocurrency, GodCoin emerges as a divine force in the XRPL ecosystem. Our mission is to bring celestial returns to our faithful holders while building an immortal community.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center p-4 bg-gray-800/40 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all cursor-pointer">
+                                <div class="text-yellow-500 mr-4 text-2xl">⚡</div>
+                                <div>
+                                    <h3 class="font-bold mb-1">Lightning Fast</h3>
+                                    <p class="text-sm text-yellow-100/80">Powered by XRPL's blazing speed</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 bg-gray-800/40 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all cursor-pointer">
+                                <div class="text-yellow-500 mr-4 text-2xl">🛡️</div>
+                                <div>
+                                    <h3 class="font-bold mb-1">Divine Security</h3>
+                                    <p class="text-sm text-yellow-100/80">Verified and audited smart contract</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 bg-gray-800/40 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all cursor-pointer">
+                                <div class="text-yellow-500 mr-4 text-2xl">👥</div>
+                                <div>
+                                    <h3 class="font-bold mb-1">Blessed Community</h3>
+                                    <p class="text-sm text-yellow-100/80">Governed by the faithful</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="aspect-square rounded-full bg-yellow-500/20 absolute inset-0 animate-pulse"></div>
+                        <img src="/api/placeholder/500/500" alt="GodCoin Symbol" class="relative z-10 floating">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap" class="py-32 relative">
+            <div class="container mx-auto px-6">
+                <h2 class="text-5xl font-bold mb-16 text-center text-yellow-500 glow-text">Divine Roadmap</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="space-y-8">
+                        <div class="roadmap-item flex gap-6">
+                            <div class="w-32 text-yellow-500 font-bold text-right">Phase 1</div>
+                            <div class="flex-1 bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all">
+                                <h3 class="font-bold text-xl mb-4">Genesis</h3>
+                                <ul class="space-y-2 text-yellow-100/80">
+                                    <li>✓ Token Launch</li>
+                                    <li>✓ Community Building</li>
+                                    <li>✓ Website Launch</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="roadmap-item flex gap-6">
+                            <div class="w-32 text-yellow-500 font-bold text-right">Phase 2</div>
+                            <div class="flex-1 bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all">
+                                <h3 class="font-bold text-xl mb-4">Ascension</h3>
+                                <ul class="space-y-2 text-yellow-100/80">
+                                    <li>• Marketing Campaign</li>
+                                    <li>• Exchange Listings</li>
+                                    <li>• NFT Collection</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="roadmap-item flex gap-6">
+                            <div class="w-32 text-yellow-500 font-bold text-right">Phase 3</div>
+                            <div class="flex-1 bg-gray-800/40 p-6 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all">
+                                <h3 class="font-bold text-xl mb-4">Divinity</h3>
+                                <ul class="space-y-2 text-yellow-100/80">
+                                    <li>• Governance Platform</li>
+                                    <li>• Strategic Partnerships</li>
+                                    <li>• Global Expansion</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Buy Section -->
+        <section id="buy" class="py-32 relative">
+            <div class="container mx-auto px-6">
+                <h2 class="text-5xl font-bold mb-16 text-center text-yellow-500 glow-text">How to Buy</h2>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-800/40 p-8 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all text-center">
+                        <div class="text-4xl mb-6">💰</div>
+                        <h3 class="font-bold text-xl mb-4">1. Get XRP</h3>
+                        <p class="text-yellow-100/80">Purchase XRP from your preferred exchange</p>
+                    </div>
+                    <div class="bg-gray-800/40 p-8 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all text-center">
+                        <div class="text-4xl mb-6">👛</div>
+                        <h3 class="font-bold text-xl mb-4">2. Setup Wallet</h3>
+                        <p class="text-yellow-100/80">Connect your XRPL compatible wallet</p>
+                    </div>
+                    <div class="bg-gray-800/40 p-8 rounded-lg border border-yellow-500/20 transform hover:scale-105 transition-all text-center">
+                        <div class="text-4xl mb-6">✨</div>
+                        <h3 class="font-bold text-xl mb-4">3. Swap</h3>
+                        <p class="text-yellow-100/80">Swap XRP for GODCOIN on our platform</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 relative">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-yellow-500 glow-text mb-8">GODCOIN</div>
+                    <div class="flex justify-center space-x-8 mb-8">
+                        <a href="#" class="text-yellow-100/80 hover:text-yellow-500 transform hover:scale-110 transition-all">Twitter</a>
+                        <a href="#" class="text-yellow-100/80 hover:text-yellow-500 transform hover:scale-110 transition-all">Telegram</a>
+                        <a href="#" class="text-yellow-100/80 hover:text-yellow-500 transform hover:scale-110 transition-all">Discord</a>
+                    </div>
+                    <p class="text-yellow-100/60">© 2025 GodCoin. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Three.js Background
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
